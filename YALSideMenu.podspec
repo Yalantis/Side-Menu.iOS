@@ -15,6 +15,7 @@ Pod::Spec.new do |spec|
 
   spec.source       = { :git => 'https://github.com/Yalantis/Side-Menu.iOS.git', :tag => '1.0' }
   spec.source_files = 'SideMenu/*.swift'
-  spec.module_name	= 'SideMenu'
+  spec.module_name  = 'SideMenu'
+  spec.requires_arc = true
 
 end
