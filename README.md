@@ -1,4 +1,6 @@
 #Side Menu
+[![Platform](http://img.shields.io/badge/platform-iOS-blue.svg?style=flat)](http://cocoapods.org/?q=YALSideMenu)
+[![License](http://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://github.com/Yalantis/Side-Menu.iOS/blob/master/LICENSE)
 
 Animated side menu with customizable UI. 
 Made in <a href="http://yalantis.com/"> Yalantis</a>.<br>
