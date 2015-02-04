@@ -43,7 +43,8 @@ github "yalantis/Side-Menu.iOS"
 4. Ensure that the deployment target of `SideMenu.framework` matches that of the application target.
 5. In the tab bar at the top of that window, open the "Build Phases" panel.
 6. Expand the "Target Dependencies" group, and add `SideMenu.framework`.
-7. Click on the `+` button at the top left of the panel and select "New Copy Files Phase". Rename this new phase to "Copy Frameworks", set the "Destination" to "Frameworks", and add `SideMenu.framework`.
+7. Expand the "Link Binary With Libraries" group, and add `SideMenu.framework`
+8. Click on the `+` button at the top left of the panel and select "New Copy Files Phase". Rename this new phase to "Copy Frameworks", set the "Destination" to "Frameworks", and add `SideMenu.framework`.
 
 ##Usage
 
