@@ -25,14 +25,6 @@ pod 'YALSideMenu'
 
 *(CocoaPods v0.36 or later required. See [this blog post](http://blog.cocoapods.org/Pod-Authors-Guide-to-CocoaPods-Frameworks/) for details.)*
 
-####Using [Carthage](https://github.com/Carthage/Carthage)
-
-Simply add the following line to your Cartfile:
-
-```ruby
-github "yalantis/Side-Menu.iOS"
-```
-
 ####Manual Installation
 
 > For application targets that do not support embedded frameworks, such as iOS 7, SideMenu can be integrated by including source files from the SideMenu folder directly, optionally wrapping the top-level types into `struct SideMenu` to simulate a namespace. Yes, this sucks.
