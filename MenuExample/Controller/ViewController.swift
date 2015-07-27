@@ -32,7 +32,7 @@ extension ViewController: MenuViewControllerDelegate {
         transitionPoint = point
         selectedIndex = index
 
-        let content = storyboard!.instantiateViewControllerWithIdentifier("Content") as ContentViewController
+        let content = storyboard!.instantiateViewControllerWithIdentifier("Content") as! ContentViewController
         content.type = contentType
         self.navigator.setViewControllers([content], animated: true)
 
