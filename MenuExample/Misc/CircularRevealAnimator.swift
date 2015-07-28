@@ -29,8 +29,8 @@ class CircularRevealAnimator {
     }
 
     init(layer: CALayer, center: CGPoint, startRadius: CGFloat, endRadius: CGFloat) {
-        let startPath = CGPathCreateWithEllipseInRect(SquareAroundCircle(center, startRadius), nil)
-        let endPath = CGPathCreateWithEllipseInRect(SquareAroundCircle(center, endRadius), nil)
+        let startPath = CGPathCreateWithEllipseInRect(SquareAroundCircle(center, radius: startRadius), UnsafePointer())
+        let endPath = CGPathCreateWithEllipseInRect(SquareAroundCircle(center, radius: endRadius), UnsafePointer())
 
         self.layer = layer
 
