@@ -19,7 +19,10 @@ class MenuViewController: UITableViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
 
+//      For some reason iOS9 ignore background color for this VC when it set from storyboard. With white background animation looks ugly...
+//      TODO: Try to remove it after iOS9 release.
         self.view.backgroundColor = UIColor.clearColor()
+        
         let indexPath = NSIndexPath(forRow: selectedItem, inSection: 0)
         tableView.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: .None)
     }
