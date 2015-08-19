@@ -23,18 +23,18 @@ class MenuTransitionAnimator: NSObject {
 
         let view = menu.view
         view.frame = CGRectMake(0, 0, menu.preferredContentSize.width, host.view.bounds.height)
-        view.autoresizingMask = .FlexibleRightMargin | .FlexibleHeight
-        view.setTranslatesAutoresizingMaskIntoConstraints(true)
-        context.containerView().addSubview(view)
+        view.autoresizingMask = [.FlexibleRightMargin, .FlexibleHeight]
+        view.translatesAutoresizingMaskIntoConstraints = true
+        context.containerView()!.addSubview(view)
 
-        animateMenu(menu as Menu, startAngle: angle, endAngle: 0) {
+        animateMenu(menu as! Menu, startAngle: angle, endAngle: 0) {
             context.completeTransition(true)
         }
     }
 
     private func animateDismissal(context: UIViewControllerContextTransitioning) {
         if let menu = context.viewControllerForKey(UITransitionContextFromViewControllerKey) {
-            animateMenu(menu as Menu, startAngle: 0, endAngle: angle) {
+            animateMenu(menu as! Menu, startAngle: 0, endAngle: angle) {
                 menu.view.removeFromSuperview()
                 context.completeTransition(true)
             }
@@ -59,7 +59,7 @@ extension MenuTransitionAnimator: UIViewControllerAnimatedTransitioning {
         }
     }
 
-    func transitionDuration(context: UIViewControllerContextTransitioning) -> NSTimeInterval {
+    func transitionDuration(context: UIViewControllerContextTransitioning?) -> NSTimeInterval {
         return duration
     }
 }
