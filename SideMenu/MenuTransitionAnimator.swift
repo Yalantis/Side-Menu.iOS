@@ -27,14 +27,14 @@ class MenuTransitionAnimator: NSObject {
         view.setTranslatesAutoresizingMaskIntoConstraints(true)
         context.containerView().addSubview(view)
 
-        animateMenu(menu as Menu, startAngle: angle, endAngle: 0) {
+        animateMenu(menu as! Menu, startAngle: angle, endAngle: 0) {
             context.completeTransition(true)
         }
     }
 
     private func animateDismissal(context: UIViewControllerContextTransitioning) {
         if let menu = context.viewControllerForKey(UITransitionContextFromViewControllerKey) {
-            animateMenu(menu as Menu, startAngle: 0, endAngle: angle) {
+            animateMenu(menu as! Menu, startAngle: 0, endAngle: angle) {
                 menu.view.removeFromSuperview()
                 context.completeTransition(true)
             }

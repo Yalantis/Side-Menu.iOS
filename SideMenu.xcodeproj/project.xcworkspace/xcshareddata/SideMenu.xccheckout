@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>4B0D4046-9727-46F4-9B39-EF02AA7D4D60</string>
+	<key>IDESourceControlProjectName</key>
+	<string>SideMenu</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>E82B78FDD5A47F8D646C1792567DEFB4E1658A1A</key>
+		<string>https://github.com/jycr753/Side-Menu.iOS.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>SideMenu.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>E82B78FDD5A47F8D646C1792567DEFB4E1658A1A</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/jycr753/Side-Menu.iOS.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>E82B78FDD5A47F8D646C1792567DEFB4E1658A1A</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>E82B78FDD5A47F8D646C1792567DEFB4E1658A1A</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Side-Menu.iOS</string>
+		</dict>
+	</array>
+</dict>
+</plist>
