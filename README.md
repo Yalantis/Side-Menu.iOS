@@ -3,7 +3,7 @@
 [![License](http://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://github.com/Yalantis/Side-Menu.iOS/blob/master/LICENSE)
 
 Animated side menu with customizable UI. 
-Made in <a href="http://yalantis.com/"> Yalantis</a>.<br>
+Made in <a href="https://yalantis.com/?utm_source=github"> Yalantis</a>.<br>
 Check this <a href="https://dribbble.com/shots/1689922-Side-Menu-Animation?list=searches&tag=yalantis&offset=0">project on dribbble</a>.<br>
 Check this <a href="https://www.behance.net/gallery/20411445/Mobile-Animations-Interactions ">project on Behance</a>.
 
