@@ -16,8 +16,8 @@ class MenuSegue: UIStoryboardSegue {
     }
 
     override func perform() {
-        let source = sourceViewController as UIViewController
-        let target = destinationViewController as UIViewController
+        let source = sourceViewController as! UIViewController
+        let target = destinationViewController as! UIViewController
 
         target.modalPresentationStyle = .Custom
         target.transitioningDelegate = self
