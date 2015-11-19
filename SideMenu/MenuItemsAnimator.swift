@@ -34,12 +34,12 @@ class MenuItemsAnimator {
     func start() {
         let count = Double(layers.count)
         let duration = self.duration * count / (4 * count - 3)
-        for (index, layer) in enumerate(layers) {
-            layer.transform = TransformForRotatingLayer(layer, startAngle)
+        for (index, layer) in layers.enumerate() {
+            layer.transform = TransformForRotatingLayer(layer, angle: startAngle)
 
             let delay = 3 * duration * Double(index) / count
             UIView.animateWithDuration(duration, delay: delay, options: .CurveEaseIn, animations: {
-                layer.transform = TransformForRotatingLayer(layer, self.endAngle)
+                layer.transform = TransformForRotatingLayer(layer, angle: self.endAngle)
             }, completion: nil)
         }
 

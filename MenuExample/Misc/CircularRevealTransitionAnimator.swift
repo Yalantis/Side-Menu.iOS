@@ -23,7 +23,7 @@ extension CircularRevealTransitionAnimator: UIViewControllerAnimatedTransitionin
         let target = context.viewForKey(UITransitionContextToViewKey)!
 
         target.frame = frame
-        context.containerView().insertSubview(target, aboveSubview: source)
+        context.containerView()!.insertSubview(target, aboveSubview: source)
 
         let center = target.convertPoint(self.center, fromView: nil)
         let radius: CGFloat = {
@@ -42,7 +42,7 @@ extension CircularRevealTransitionAnimator: UIViewControllerAnimatedTransitionin
         animator.start()
     }
 
-    func transitionDuration(transitionContext: UIViewControllerContextTransitioning) -> NSTimeInterval {
+    func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval {
         return duration
     }
 }

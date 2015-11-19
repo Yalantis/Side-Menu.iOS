@@ -18,7 +18,7 @@ class MenuViewController: UITableViewController {
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-
+        
         let indexPath = NSIndexPath(forRow: selectedItem, inSection: 0)
         tableView.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: .None)
     }
@@ -33,18 +33,19 @@ extension MenuViewController {
 
 extension MenuViewController: Menu {
     var menuItems: [UIView] {
-        return [tableView.tableHeaderView!] + tableView.visibleCells() as [UIView]
+        return [tableView.tableHeaderView!] + tableView.visibleCells
     }
 }
 
-extension MenuViewController: UITableViewDelegate {
+// MARK: - UITableViewDelegate
+extension MenuViewController {
     override func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
-        return indexPath == tableView.indexPathForSelectedRow() ? nil : indexPath
+        return indexPath == tableView.indexPathForSelectedRow ? nil : indexPath
     }
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let rect = tableView.rectForRowAtIndexPath(indexPath)
-        var point = CGPointMake(CGRectGetMidX(rect), CGRectGetMidY(rect))
+        var point = CGPointMake(rect.midX, rect.midY)
         point = tableView.convertPoint(point, toView: nil)
         delegate?.menu(self, didSelectItemAtIndex: indexPath.row, atPoint:point)
     }

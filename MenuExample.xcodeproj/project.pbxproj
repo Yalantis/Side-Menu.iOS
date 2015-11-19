@@ -236,6 +236,7 @@
 		50B966461A25E40E00208F2E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = Yalantis;
 				TargetAttributes = {
@@ -248,6 +249,9 @@
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
 			mainGroup = 50B966451A25E40E00208F2E;
 			productRefGroup = 50B9664F1A25E40E00208F2E /* Products */;
 			projectDirPath = "";
