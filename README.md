@@ -9,12 +9,9 @@ Check this <a href="https://www.behance.net/gallery/20411445/Mobile-Animations-I
 
 <img src="https://d13yacurqjgara.cloudfront.net/users/125056/screenshots/1689922/events-menu_1-1-6.gif" />
 
-## Swift 2.0
-Currently we maintain a [branch](https://github.com/Yalantis/Side-Menu.iOS/tree/swift_2.0) to provide support for Swift 2.0.
-
 ##Requirements
 
-iOS 7.x / 8.x (see installation instructions)
+iOS 7.x / 8.x / 9.x (see installation instructions)
 
 ##Installation
 
