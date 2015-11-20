@@ -54,7 +54,7 @@ pod 'YALSideMenu'
 		var menuItems = [UIView] ()
 	```
 
-3. Set `preferredContentSize` to specify the desired menu width
+3. Set `preferredContentSize` in menu view controller to specify the desired menu width
 4. In content view controller store an animator, that will animate our menu.
 
     ```swift
