@@ -23,13 +23,6 @@ public class MenuTransitionAnimator: NSObject {
         super.init()
     }
     
-    //MARK: Internal methods
-    internal func menuTappedOutside(sender: UIButton) {
-        if tappedOutsideHandler != nil {
-            tappedOutsideHandler!()
-        }
-    }
-    
     //MARK: Private methods
     private func animatePresentation(context: UIViewControllerContextTransitioning) {
         let host = context.viewControllerForKey(UITransitionContextFromViewControllerKey)!
@@ -53,6 +46,12 @@ public class MenuTransitionAnimator: NSObject {
         
         animateMenu(menu as! Menu, startAngle: angle, endAngle: 0) {
             context.completeTransition(true)
+        }
+    }
+    
+    @objc private func menuTappedOutside(sender: UIButton) {
+        if tappedOutsideHandler != nil {
+            tappedOutsideHandler!()
         }
     }
     
