@@ -9,17 +9,19 @@ import UIKit
 public class MenuTransitionAnimator: NSObject {
     //MARK: Public properties
     public enum Mode { case Presentation, Dismissal }
-    public var mode: Mode = .Presentation
-    public var shouldPassEvents : Bool
-    public var tappedOutsideHandler : (() -> Void)?
+    
     //MARK: Private properties
     private let duration = 0.5
     private let angle: CGFloat = 2
+    private var mode: Mode
+    private var shouldPassEventsOutsideMenu : Bool
+    private var tappedOutsideHandler : (() -> Void)?
     
     //MARK: Public methods
-    public init(shouldPassEvents: Bool, tappedOutsideHandler: (() -> Void)?) {
+    public init(mode: Mode, shouldPassEventsOutsideMenu: Bool = true, tappedOutsideHandler: (() -> Void)? = nil) {
+        self.mode = mode
         self.tappedOutsideHandler = tappedOutsideHandler
-        self.shouldPassEvents = shouldPassEvents
+        self.shouldPassEventsOutsideMenu = shouldPassEventsOutsideMenu
         super.init()
     }
     
@@ -33,7 +35,7 @@ public class MenuTransitionAnimator: NSObject {
         view.autoresizingMask = [.FlexibleRightMargin, .FlexibleHeight]
         view.translatesAutoresizingMaskIntoConstraints = true
         
-        if shouldPassEvents == true {
+        if shouldPassEventsOutsideMenu == true {
             context.containerView()!.frame = view.frame
         } else {
             let tapButton = UIButton(frame: host.view.frame)

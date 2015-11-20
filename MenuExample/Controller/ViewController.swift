@@ -12,8 +12,9 @@ class ViewController: UIViewController {
     private var transitionPoint: CGPoint!
     private var contentType: ContentType = .Music
     private var navigator: UINavigationController!
-    private var menuAnimator : MenuTransitionAnimator!
-
+    lazy private var menuAnimator : MenuTransitionAnimator! = MenuTransitionAnimator(mode: .Presentation, shouldPassEventsOutsideMenu: false) { [unowned self] in
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         switch (segue.identifier, segue.destinationViewController) {
             case (.Some("presentMenu"), let menu as MenuViewController):
@@ -27,14 +28,6 @@ class ViewController: UIViewController {
             default:
                 super.prepareForSegue(segue, sender: sender)
         }
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        menuAnimator = MenuTransitionAnimator(shouldPassEvents: false, tappedOutsideHandler: {
-           [unowned self] in
-            self.dismissViewControllerAnimated(true, completion: nil)
-        })
     }
 }
 
@@ -69,13 +62,11 @@ extension ViewController: UINavigationControllerDelegate {
 extension ViewController: UIViewControllerTransitioningDelegate {
     func animationControllerForPresentedController(presented: UIViewController, presentingController _: UIViewController,
         sourceController _: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-            menuAnimator.mode = .Presentation
             return menuAnimator
     }
     
     func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        menuAnimator.mode = .Dismissal
-        return menuAnimator
+        return MenuTransitionAnimator(mode: .Dismissal)
     }
 
 }
