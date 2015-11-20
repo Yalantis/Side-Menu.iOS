@@ -10,7 +10,6 @@
 		50B42F061A6A879C00B05352 /* SideMenu.h in Headers */ = {isa = PBXBuildFile; fileRef = 50B42F051A6A879C00B05352 /* SideMenu.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D527A1BB75178BD3056AF143 /* MenuItemsAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D527A71BDF077866724721AB /* MenuItemsAnimator.swift */; };
 		D527A273803C14491AA342C3 /* MenuTransitionAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D527A2A61BB94885601BE108 /* MenuTransitionAnimator.swift */; };
-		D527A5EFA97FF89A1143298F /* MenuSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D527AA77AFD20314004ABBFE /* MenuSegue.swift */; };
 		D527A82567B79C5B10E766A6 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = D527A8F5BB896136B96C89C2 /* Menu.swift */; };
 /* End PBXBuildFile section */
 
@@ -21,7 +20,6 @@
 		D527A2A61BB94885601BE108 /* MenuTransitionAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTransitionAnimator.swift; sourceTree = "<group>"; };
 		D527A71BDF077866724721AB /* MenuItemsAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuItemsAnimator.swift; sourceTree = "<group>"; };
 		D527A8F5BB896136B96C89C2 /* Menu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
-		D527AA77AFD20314004ABBFE /* MenuSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuSegue.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,7 +54,6 @@
 			children = (
 				50B42F051A6A879C00B05352 /* SideMenu.h */,
 				D527A8F5BB896136B96C89C2 /* Menu.swift */,
-				D527AA77AFD20314004ABBFE /* MenuSegue.swift */,
 				D527A71BDF077866724721AB /* MenuItemsAnimator.swift */,
 				D527A2A61BB94885601BE108 /* MenuTransitionAnimator.swift */,
 				50B42F031A6A879C00B05352 /* Supporting Files */,
@@ -152,7 +149,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D527A5EFA97FF89A1143298F /* MenuSegue.swift in Sources */,
 				D527A273803C14491AA342C3 /* MenuTransitionAnimator.swift in Sources */,
 				D527A1BB75178BD3056AF143 /* MenuItemsAnimator.swift in Sources */,
 				D527A82567B79C5B10E766A6 /* Menu.swift in Sources */,

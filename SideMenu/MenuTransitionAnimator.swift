@@ -6,32 +6,56 @@
 
 import UIKit
 
-class MenuTransitionAnimator: NSObject {
-    enum Mode { case Presentation, Dismissal }
-
-    private let mode: Mode
+public class MenuTransitionAnimator: NSObject {
+    //MARK: Public properties
+    public enum Mode { case Presentation, Dismissal }
+    public var mode: Mode = .Presentation
+    public var shouldPassEvents : Bool
+    public var tappedOutsideHandler : (() -> Void)?
+    //MARK: Private properties
     private let duration = 0.5
     private let angle: CGFloat = 2
-
-    init(_ mode: Mode) {
-        self.mode = mode
+    
+    //MARK: Public methods
+    public init(shouldPassEvents: Bool, tappedOutsideHandler: (() -> Void)?) {
+        self.tappedOutsideHandler = tappedOutsideHandler
+        self.shouldPassEvents = shouldPassEvents
+        super.init()
     }
-
+    
+    //MARK: Internal methods
+    internal func menuTappedOutside(sender: UIButton) {
+        if tappedOutsideHandler != nil {
+            tappedOutsideHandler!()
+        }
+    }
+    
+    //MARK: Private methods
     private func animatePresentation(context: UIViewControllerContextTransitioning) {
         let host = context.viewControllerForKey(UITransitionContextFromViewControllerKey)!
-        let menu = context.viewControllerForKey(UITransitionContextToViewControllerKey)!
+        let menu = context.viewControllerForKey(UITransitionContextToViewControllerKey)! 
 
         let view = menu.view
         view.frame = CGRectMake(0, 0, menu.preferredContentSize.width, host.view.bounds.height)
         view.autoresizingMask = [.FlexibleRightMargin, .FlexibleHeight]
         view.translatesAutoresizingMaskIntoConstraints = true
+        
+        if shouldPassEvents == true {
+            context.containerView()!.frame = view.frame
+        } else {
+            let tapButton = UIButton(frame: host.view.frame)
+            tapButton.layer.backgroundColor = UIColor.clearColor().CGColor
+            tapButton.addTarget(self, action: Selector("menuTappedOutside:"), forControlEvents: .TouchUpInside)
+            context.containerView()!.addSubview(tapButton)
+        }
+        
         context.containerView()!.addSubview(view)
-
+        
         animateMenu(menu as! Menu, startAngle: angle, endAngle: 0) {
             context.completeTransition(true)
         }
     }
-
+    
     private func animateDismissal(context: UIViewControllerContextTransitioning) {
         if let menu = context.viewControllerForKey(UITransitionContextFromViewControllerKey) {
             animateMenu(menu as! Menu, startAngle: 0, endAngle: angle) {
@@ -48,9 +72,9 @@ class MenuTransitionAnimator: NSObject {
         animator.start()
     }
 }
-
+//MARK: Extensions
 extension MenuTransitionAnimator: UIViewControllerAnimatedTransitioning {
-    func animateTransition(context: UIViewControllerContextTransitioning) {
+    public func animateTransition(context: UIViewControllerContextTransitioning) {
         switch mode {
             case .Presentation:
                 animatePresentation(context)
@@ -59,7 +83,7 @@ extension MenuTransitionAnimator: UIViewControllerAnimatedTransitioning {
         }
     }
 
-    func transitionDuration(context: UIViewControllerContextTransitioning?) -> NSTimeInterval {
+    public func transitionDuration(context: UIViewControllerContextTransitioning?) -> NSTimeInterval {
         return duration
     }
 }

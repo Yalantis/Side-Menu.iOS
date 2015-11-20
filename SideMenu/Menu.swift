@@ -10,3 +10,4 @@ import UIKit
 public protocol Menu {
     var menuItems: [UIView] {get}
 }
+
