@@ -15,13 +15,14 @@ protocol MenuViewControllerDelegate: class {
 class MenuViewController: UITableViewController {
     weak var delegate: MenuViewControllerDelegate?
     var selectedItem = 0
-
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
         let indexPath = NSIndexPath(forRow: selectedItem, inSection: 0)
         tableView.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: .None)
     }
+    
 }
 
 extension MenuViewController {
@@ -31,7 +32,8 @@ extension MenuViewController {
     }
 }
 
-extension MenuViewController: Menu {
+//MARK: Menu protocol
+extension  MenuViewController: Menu {
     var menuItems: [UIView] {
         return [tableView.tableHeaderView!] + tableView.visibleCells
     }

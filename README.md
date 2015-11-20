@@ -54,9 +54,41 @@ pod 'YALSideMenu'
 		var menuItems = [UIView] ()
 	```
 
-3. Set `preferredContentSize` to specify the desired menu width
-4. Use custom `MenuSegue` to present your menu view controller
+3. Set `preferredContentSize` in menu view controller to specify the desired menu width
+4. In content view controller store an animator, that will animate our menu.
 
+    ```swift
+    import SideMenu
+    class ContentViewController: UIViewController  {
+        var menuAnimator : MenuTransitionAnimator!
+    }
+    ```
+5. Initialize an animator for presentation with parameters
+
+    ```swift
+    menuAnimator = MenuTransitionAnimator(mode: .Presentation, shouldPassEventsOutsideMenu: false) { [unowned self] in
+    self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    ```
+    If you want, for example, to dismiss your menu when a tap outside menu takes place, you should pass 'false' to 'shouldPassEventsOutsideMenu' flag and assign a 'tappedOutsideHandler'.In fact, you are free to do whatever you want when a tap outside menu occurs or, if you want to have access to your content view controller, just pass 'true' and assign 'tappedOutsideHandler' to nil.
+6. Implement class of UIViewControllerTransitioningDelegate that will return our menuAnimator from method animationControllerForPresentedController and assign it to transitioningDelegate of menu view controller(Don't forget to set .Custom modal presentation style). To dismiss menu you should return MenuTransitionAnimator(mode: .Dismissal) from animationControllerForDismissedController method.
+
+    ```swift
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    let menu = segue.destinationViewController as! MenuViewController
+    menu.transitioningDelegate = self
+    menu.modalPresentationStyle = .Custom
+    }
+
+    func animationControllerForPresentedController(presented: UIViewController, presentingController _: UIViewController,
+    sourceController _: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return menuAnimator
+    }
+
+    func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return MenuTransitionAnimator(mode: .Dismissal)
+    }
+    ```
 ## License
 
 	The MIT License (MIT)
