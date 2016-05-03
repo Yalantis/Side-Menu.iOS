@@ -54,8 +54,11 @@ extension ViewController: MenuViewControllerDelegate {
 extension ViewController: UINavigationControllerDelegate {
     func navigationController(_: UINavigationController, animationControllerForOperation _: UINavigationControllerOperation,
         fromViewController _: UIViewController, toViewController _: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-
-        return CircularRevealTransitionAnimator(center: transitionPoint)
+        
+        if let transitionPoint = transitionPoint {
+            return CircularRevealTransitionAnimator(center: transitionPoint)
+        }
+        return nil
     }
 }
 
