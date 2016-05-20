@@ -40,7 +40,7 @@ public class MenuTransitionAnimator: NSObject {
         } else {
             let tapButton = UIButton(frame: host.view.frame)
             tapButton.backgroundColor = UIColor.clearColor()
-            tapButton.addTarget(self, action: Selector("menuTappedOutside:"), forControlEvents: .TouchUpInside)
+            tapButton.addTarget(self, action: #selector(menuTappedOutside), forControlEvents: .TouchUpInside)
             context.containerView()!.addSubview(tapButton)
         }
         
