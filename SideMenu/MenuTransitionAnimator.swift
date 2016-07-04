@@ -8,7 +8,7 @@ import UIKit
 
 public class MenuTransitionAnimator: NSObject {
     //MARK: Public properties
-    public enum Mode { case Presentation, Dismissal }
+    @objc public enum Mode : Int { case Presentation, Dismissal }
     
     //MARK: Private properties
     private let duration = 0.5
