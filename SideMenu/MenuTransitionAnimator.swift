@@ -36,15 +36,15 @@ public class MenuTransitionAnimator: NSObject {
         view.translatesAutoresizingMaskIntoConstraints = true
         
         if shouldPassEventsOutsideMenu == true {
-            context.containerView()!.frame = view.frame
+            context.containerView().frame = view.frame
         } else {
             let tapButton = UIButton(frame: host.view.frame)
             tapButton.backgroundColor = UIColor.clearColor()
             tapButton.addTarget(self, action: #selector(menuTappedOutside), forControlEvents: .TouchUpInside)
-            context.containerView()!.addSubview(tapButton)
+            context.containerView().addSubview(tapButton)
         }
         
-        context.containerView()!.addSubview(view)
+        context.containerView().addSubview(view)
         
         animateMenu(menu as! Menu, startAngle: angle, endAngle: 0) {
             context.completeTransition(true)
