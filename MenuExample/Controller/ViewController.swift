@@ -8,25 +8,25 @@ import UIKit
 import SideMenu
 
 class ViewController: UIViewController {
-    private var selectedIndex = 0
-    private var transitionPoint: CGPoint!
-    private var contentType: ContentType = .Music
-    private var navigator: UINavigationController!
-    lazy private var menuAnimator : MenuTransitionAnimator! = MenuTransitionAnimator(mode: .Presentation, shouldPassEventsOutsideMenu: false) { [unowned self] in
-        self.dismissViewControllerAnimated(true, completion: nil)
+    fileprivate var selectedIndex = 0
+    fileprivate var transitionPoint: CGPoint!
+    fileprivate var contentType: ContentType = .Music
+    fileprivate var navigator: UINavigationController!
+    lazy fileprivate var menuAnimator : MenuTransitionAnimator! = MenuTransitionAnimator(mode: .presentation, shouldPassEventsOutsideMenu: false) { [unowned self] in
+        self.dismiss(animated: true, completion: nil)
     }
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        switch (segue.identifier, segue.destinationViewController) {
-            case (.Some("presentMenu"), let menu as MenuViewController):
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch (segue.identifier, segue.destination) {
+            case (.some("presentMenu"), let menu as MenuViewController):
                 menu.selectedItem = selectedIndex
                 menu.delegate = self
                 menu.transitioningDelegate = self
-                menu.modalPresentationStyle = .Custom
-            case (.Some("embedNavigator"), let navigator as UINavigationController):
+                menu.modalPresentationStyle = .custom
+            case (.some("embedNavigator"), let navigator as UINavigationController):
                 self.navigator = navigator
                 self.navigator.delegate = self
             default:
-                super.prepareForSegue(segue, sender: sender)
+                super.prepare(for: segue, sender: sender)
         }
     }
 }
@@ -37,23 +37,23 @@ extension ViewController: MenuViewControllerDelegate {
         transitionPoint = point
         selectedIndex = index
 
-        let content = storyboard!.instantiateViewControllerWithIdentifier("Content") as! ContentViewController
+        let content = storyboard!.instantiateViewController(withIdentifier: "Content") as! ContentViewController
         content.type = contentType
         self.navigator.setViewControllers([content], animated: true)
         
-        dispatch_async(dispatch_get_main_queue()) {
-            self.dismissViewControllerAnimated(true, completion: nil)
+        DispatchQueue.main.async {
+            self.dismiss(animated: true, completion: nil)
         }
     }
 
     func menuDidCancel(_: MenuViewController) {
-        dismissViewControllerAnimated(true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
 }
 
 extension ViewController: UINavigationControllerDelegate {
-    func navigationController(_: UINavigationController, animationControllerForOperation _: UINavigationControllerOperation,
-        fromViewController _: UIViewController, toViewController _: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    func navigationController(_: UINavigationController, animationControllerFor _: UINavigationControllerOperation,
+        from _: UIViewController, to _: UIViewController) -> UIViewControllerAnimatedTransitioning? {
 
         if let transitionPoint = transitionPoint {
             return CircularRevealTransitionAnimator(center: transitionPoint)
@@ -63,13 +63,13 @@ extension ViewController: UINavigationControllerDelegate {
 }
 
 extension ViewController: UIViewControllerTransitioningDelegate {
-    func animationControllerForPresentedController(presented: UIViewController, presentingController _: UIViewController,
-        sourceController _: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    func animationController(forPresented presented: UIViewController, presenting _: UIViewController,
+        source _: UIViewController) -> UIViewControllerAnimatedTransitioning? {
             return menuAnimator
     }
     
-    func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return MenuTransitionAnimator(mode: .Dismissal)
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return MenuTransitionAnimator(mode: .dismissal)
     }
 
 }

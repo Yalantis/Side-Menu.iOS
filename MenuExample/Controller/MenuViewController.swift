@@ -8,26 +8,26 @@ import UIKit
 import SideMenu
 
 protocol MenuViewControllerDelegate: class {
-    func menu(menu: MenuViewController, didSelectItemAtIndex index: Int, atPoint point: CGPoint)
-    func menuDidCancel(menu: MenuViewController)
+    func menu(_ menu: MenuViewController, didSelectItemAtIndex index: Int, atPoint point: CGPoint)
+    func menuDidCancel(_ menu: MenuViewController)
 }
 
 class MenuViewController: UITableViewController {
     weak var delegate: MenuViewControllerDelegate?
     var selectedItem = 0
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        let indexPath = NSIndexPath(forRow: selectedItem, inSection: 0)
-        tableView.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: .None)
+        let indexPath = IndexPath(row: selectedItem, section: 0)
+        tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
     }
     
 }
 
 extension MenuViewController {
     @IBAction
-    private func dismissMenu() {
+    fileprivate func dismissMenu() {
         delegate?.menuDidCancel(self)
     }
 }
@@ -41,14 +41,14 @@ extension  MenuViewController: Menu {
 
 // MARK: - UITableViewDelegate
 extension MenuViewController {
-    override func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         return indexPath == tableView.indexPathForSelectedRow ? nil : indexPath
     }
 
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let rect = tableView.rectForRowAtIndexPath(indexPath)
-        var point = CGPointMake(rect.midX, rect.midY)
-        point = tableView.convertPoint(point, toView: nil)
-        delegate?.menu(self, didSelectItemAtIndex: indexPath.row, atPoint:point)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let rect = tableView.rectForRow(at: indexPath)
+        var point = CGPoint(x: rect.midX, y: rect.midY)
+        point = tableView.convert(point, to: nil)
+        delegate?.menu(self, didSelectItemAtIndex: (indexPath as NSIndexPath).row, atPoint:point)
     }
 }

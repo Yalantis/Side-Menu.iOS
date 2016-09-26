@@ -6,16 +6,16 @@
 
 import UIKit
 
-public class MenuTransitionAnimator: NSObject {
+open class MenuTransitionAnimator: NSObject {
     //MARK: Public properties
-    @objc public enum Mode : Int { case Presentation, Dismissal }
+    @objc public enum Mode : Int { case presentation, dismissal }
     
     //MARK: Private properties
-    private let duration = 0.5
-    private let angle: CGFloat = 2
-    private var mode: Mode
-    private var shouldPassEventsOutsideMenu : Bool
-    private var tappedOutsideHandler : (() -> Void)?
+    fileprivate let duration = 0.5
+    fileprivate let angle: CGFloat = 2
+    fileprivate var mode: Mode
+    fileprivate var shouldPassEventsOutsideMenu : Bool
+    fileprivate var tappedOutsideHandler : (() -> Void)?
     
     //MARK: Public methods
     public init(mode: Mode, shouldPassEventsOutsideMenu: Bool = true, tappedOutsideHandler: (() -> Void)? = nil) {
@@ -26,39 +26,39 @@ public class MenuTransitionAnimator: NSObject {
     }
     
     //MARK: Private methods
-    private func animatePresentation(context: UIViewControllerContextTransitioning) {
-        let host = context.viewControllerForKey(UITransitionContextFromViewControllerKey)!
-        let menu = context.viewControllerForKey(UITransitionContextToViewControllerKey)! 
+    fileprivate func animatePresentation(_ context: UIViewControllerContextTransitioning) {
+        let host = context.viewController(forKey: UITransitionContextViewControllerKey.from)!
+        let menu = context.viewController(forKey: UITransitionContextViewControllerKey.to)! 
 
         let view = menu.view
-        view.frame = CGRectMake(0, 0, menu.preferredContentSize.width, host.view.bounds.height)
-        view.autoresizingMask = [.FlexibleRightMargin, .FlexibleHeight]
-        view.translatesAutoresizingMaskIntoConstraints = true
+        view?.frame = CGRect(x: 0, y: 0, width: menu.preferredContentSize.width, height: host.view.bounds.height)
+        view?.autoresizingMask = [.flexibleRightMargin, .flexibleHeight]
+        view?.translatesAutoresizingMaskIntoConstraints = true
         
         if shouldPassEventsOutsideMenu == true {
-            context.containerView().frame = view.frame
+            context.containerView.frame = (view?.frame)!
         } else {
             let tapButton = UIButton(frame: host.view.frame)
-            tapButton.backgroundColor = UIColor.clearColor()
-            tapButton.addTarget(self, action: #selector(menuTappedOutside), forControlEvents: .TouchUpInside)
-            context.containerView().addSubview(tapButton)
+            tapButton.backgroundColor = UIColor.clear
+            tapButton.addTarget(self, action: #selector(menuTappedOutside), for: .touchUpInside)
+            context.containerView.addSubview(tapButton)
         }
         
-        context.containerView().addSubview(view)
+        context.containerView.addSubview(view!)
         
         animateMenu(menu as! Menu, startAngle: angle, endAngle: 0) {
             context.completeTransition(true)
         }
     }
     
-    @objc private func menuTappedOutside(sender: UIButton) {
+    @objc fileprivate func menuTappedOutside(_ sender: UIButton) {
         if tappedOutsideHandler != nil {
             tappedOutsideHandler!()
         }
     }
     
-    private func animateDismissal(context: UIViewControllerContextTransitioning) {
-        if let menu = context.viewControllerForKey(UITransitionContextFromViewControllerKey) {
+    fileprivate func animateDismissal(_ context: UIViewControllerContextTransitioning) {
+        if let menu = context.viewController(forKey: UITransitionContextViewControllerKey.from) {
             animateMenu(menu as! Menu, startAngle: 0, endAngle: angle) {
                 menu.view.removeFromSuperview()
                 context.completeTransition(true)
@@ -66,7 +66,7 @@ public class MenuTransitionAnimator: NSObject {
         }
     }
 
-    private func animateMenu(menu: Menu, startAngle: CGFloat, endAngle: CGFloat, completion: () -> Void) {
+    fileprivate func animateMenu(_ menu: Menu, startAngle: CGFloat, endAngle: CGFloat, completion: @escaping () -> Void) {
         let animator = MenuItemsAnimator(views: menu.menuItems, startAngle: startAngle, endAngle: endAngle)
         animator.duration = duration
         animator.completion = completion
@@ -75,16 +75,16 @@ public class MenuTransitionAnimator: NSObject {
 }
 //MARK: Extensions
 extension MenuTransitionAnimator: UIViewControllerAnimatedTransitioning {
-    public func animateTransition(context: UIViewControllerContextTransitioning) {
+    public func animateTransition(using context: UIViewControllerContextTransitioning) {
         switch mode {
-            case .Presentation:
+            case .presentation:
                 animatePresentation(context)
-            case .Dismissal:
+            case .dismissal:
                 animateDismissal(context)
         }
     }
 
-    public func transitionDuration(context: UIViewControllerContextTransitioning?) -> NSTimeInterval {
+    public func transitionDuration(using context: UIViewControllerContextTransitioning?) -> TimeInterval {
         return duration
     }
 }

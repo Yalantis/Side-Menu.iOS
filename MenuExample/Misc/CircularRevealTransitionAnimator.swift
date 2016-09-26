@@ -7,8 +7,8 @@
 import UIKit
 
 class CircularRevealTransitionAnimator: NSObject {
-    private let duration = 0.5
-    private let center: CGPoint
+    fileprivate let duration = 0.5
+    fileprivate let center: CGPoint
 
     init(center: CGPoint) {
         self.center = center
@@ -16,16 +16,16 @@ class CircularRevealTransitionAnimator: NSObject {
 }
 
 extension CircularRevealTransitionAnimator: UIViewControllerAnimatedTransitioning {
-    func animateTransition(context: UIViewControllerContextTransitioning) {
-        let frame = context.finalFrameForViewController(context.viewControllerForKey(UITransitionContextToViewControllerKey)!)
+    func animateTransition(using context: UIViewControllerContextTransitioning) {
+        let frame = context.finalFrame(for: context.viewController(forKey: UITransitionContextViewControllerKey.to)!)
 
-        let source = context.viewForKey(UITransitionContextFromViewKey)!
-        let target = context.viewForKey(UITransitionContextToViewKey)!
+        let source = context.view(forKey: UITransitionContextViewKey.from)!
+        let target = context.view(forKey: UITransitionContextViewKey.to)!
 
         target.frame = frame
-        context.containerView().insertSubview(target, aboveSubview: source)
+        context.containerView.insertSubview(target, aboveSubview: source)
 
-        let center = target.convertPoint(self.center, fromView: nil)
+        let center = target.convert(self.center, from: nil)
         let radius: CGFloat = {
             let x = max(center.x, frame.width - center.x)
             let y = max(center.y, frame.height - center.y)
@@ -34,7 +34,7 @@ extension CircularRevealTransitionAnimator: UIViewControllerAnimatedTransitionin
 
         let animator = CircularRevealAnimator(layer: target.layer, center: center, startRadius: 0, endRadius: radius)
         animator.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
-        animator.duration = transitionDuration(context)
+        animator.duration = transitionDuration(using: context)
         animator.completion = {
             source.removeFromSuperview()
             context.completeTransition(true)
@@ -42,7 +42,7 @@ extension CircularRevealTransitionAnimator: UIViewControllerAnimatedTransitionin
         animator.start()
     }
 
-    func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval {
+    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return duration
     }
 }
