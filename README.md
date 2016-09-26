@@ -1,4 +1,5 @@
 #Side Menu
+
 [![Platform](http://img.shields.io/badge/platform-iOS-blue.svg?style=flat)](http://cocoapods.org/?q=YALSideMenu)
 [![License](http://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://github.com/Yalantis/Side-Menu.iOS/blob/master/LICENSE)
 
@@ -11,7 +12,9 @@ Check this <a href="https://www.behance.net/gallery/20411445/Mobile-Animations-I
 
 ##Requirements
 
-iOS 7.x / 8.x / 9.x (see installation instructions)
+- iOS 7.x / 8.x / 9.x (see installation instructions)
+- Swift 3
+- Xcode 8
 
 ##Installation
 
@@ -20,7 +23,7 @@ iOS 7.x / 8.x / 9.x (see installation instructions)
 Simply add the following line to your Podfile:
 
 ```ruby
-pod 'YALSideMenu'
+pod 'YALSideMenu', '~> 2.0'
 ```
 
 *(CocoaPods v0.36 or later required. See [this blog post](http://blog.cocoapods.org/Pod-Authors-Guide-to-CocoaPods-Frameworks/) for details.)*
@@ -50,8 +53,8 @@ pod 'YALSideMenu'
 
 	```swift
 	class MyFancyMenuViewController: UIViewController, Menu  {
-		@IBOutlet
-		var menuItems = [UIView] ()
+		@IBOutlet var menuItems = [UIView] ()
+	}
 	```
 
 3. Set `preferredContentSize` in menu view controller to specify the desired menu width
@@ -66,27 +69,27 @@ pod 'YALSideMenu'
 5. Initialize an animator for presentation with parameters
 
     ```swift
-    menuAnimator = MenuTransitionAnimator(mode: .Presentation, shouldPassEventsOutsideMenu: false) { [unowned self] in
-    self.dismissViewControllerAnimated(true, completion: nil)
+    menuAnimator = MenuTransitionAnimator(mode: .presentation, shouldPassEventsOutsideMenu: false) { [unowned self] in
+	    self.dismiss(animated: true, completion: nil)
     }
     ```
     If you want, for example, to dismiss your menu when a tap outside menu takes place, you should pass 'false' to 'shouldPassEventsOutsideMenu' flag and assign a 'tappedOutsideHandler'.In fact, you are free to do whatever you want when a tap outside menu occurs or, if you want to have access to your content view controller, just pass 'true' and assign 'tappedOutsideHandler' to nil.
 6. Implement class of UIViewControllerTransitioningDelegate that will return our menuAnimator from method animationControllerForPresentedController and assign it to transitioningDelegate of menu view controller(Don't forget to set .Custom modal presentation style). To dismiss menu you should return MenuTransitionAnimator(mode: .Dismissal) from animationControllerForDismissedController method.
 
     ```swift
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    let menu = segue.destinationViewController as! MenuViewController
-    menu.transitioningDelegate = self
-    menu.modalPresentationStyle = .Custom
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+	    let menu = segue.destination as! MenuViewController
+	    menu.transitioningDelegate = self
+	    menu.modalPresentationStyle = .custom
     }
 
-    func animationControllerForPresentedController(presented: UIViewController, presentingController _: UIViewController,
-    sourceController _: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return menuAnimator
+    func animationController(forPresented presented: UIViewController, presenting _: UIViewController,
+        source _: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+            return menuAnimator
     }
-
-    func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return MenuTransitionAnimator(mode: .Dismissal)
+    
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return MenuTransitionAnimator(mode: .dismissal)
     }
     ```
 
@@ -100,7 +103,7 @@ P.S. We’re going to publish more awesomeness wrapped in code and a tutorial on
 
 	The MIT License (MIT)
 
-	Copyright © 2014 Yalantis
+	Copyright © 2016 Yalantis
 
 	Permission is hereby granted, free of charge, to any person obtaining a copy
 	of this software and associated documentation files (the "Software"), to deal
