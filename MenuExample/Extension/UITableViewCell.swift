@@ -7,8 +7,8 @@
 import UIKit
 
 extension UITableViewCell {
-    @IBInspectable
-    var normalBackgroundColor: UIColor? {
+    
+    @IBInspectable var normalBackgroundColor: UIColor? {
         get {
             return backgroundView?.backgroundColor
         }
@@ -19,8 +19,7 @@ extension UITableViewCell {
         }
     }
 
-    @IBInspectable
-    var selectedBackgroundColor: UIColor? {
+    @IBInspectable var selectedBackgroundColor: UIColor? {
         get {
             return selectedBackgroundView?.backgroundColor
         }

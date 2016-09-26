@@ -7,6 +7,7 @@
 import UIKit
 
 class CircularRevealTransitionAnimator: NSObject {
+    
     fileprivate let duration = 0.5
     fileprivate let center: CGPoint
 
@@ -16,6 +17,7 @@ class CircularRevealTransitionAnimator: NSObject {
 }
 
 extension CircularRevealTransitionAnimator: UIViewControllerAnimatedTransitioning {
+    
     func animateTransition(using context: UIViewControllerContextTransitioning) {
         let frame = context.finalFrame(for: context.viewController(forKey: UITransitionContextViewControllerKey.to)!)
 

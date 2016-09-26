@@ -12,13 +12,14 @@ private func SquareAroundCircle(_ center: CGPoint, radius: CGFloat) -> CGRect {
 }
 
 class CircularRevealAnimator {
-    var completion: () -> Void = {}
+    
+    var completion: (() -> Void)?
 
     fileprivate let layer: CALayer
     fileprivate let mask: CAShapeLayer
     fileprivate let animation: CABasicAnimation
 
-    var duration: CFTimeInterval {
+    var duration: TimeInterval {
         get { return animation.duration }
         set(value) { animation.duration = value }
     }
@@ -42,7 +43,7 @@ class CircularRevealAnimator {
         animation.toValue = endPath
         animation.delegate = AnimationDelegate {
             layer.mask = nil
-            self.completion()
+            self.completion?()
             self.animation.delegate = nil
         }
     }
