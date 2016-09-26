@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
 
   spec.name         = 'YALSideMenu'
-  spec.version      = '1.2.2'
+  spec.version      = '2.0'
   spec.summary      = 'Animated side menu with customizable UI'
   spec.screenshot   = 'https://d13yacurqjgara.cloudfront.net/users/125056/screenshots/1689922/events-menu_1-1-6.gif'
 
