@@ -18,9 +18,8 @@ private func TransformForRotatingLayer(_ layer: CALayer, angle: CGFloat) -> CATr
 }
 
 class MenuItemsAnimator {
-    
-    var completion: (() -> Void)?
-    var duration: TimeInterval = 0
+    var completion: () -> Void = {}
+    var duration: CFTimeInterval = 0
 
     fileprivate let layers: [CALayer]
     fileprivate let startAngle: CGFloat
@@ -34,19 +33,18 @@ class MenuItemsAnimator {
 
     func start() {
         let count = Double(layers.count)
-        let duration = self.duration * count / (4 * count - 3)
+        let animationDuration = self.duration * count / (4 * count - 3)
         for (index, layer) in layers.enumerated() {
             layer.transform = TransformForRotatingLayer(layer, angle: startAngle)
 
-            let delay = 3 * duration * Double(index) / count
-            UIView.animate(withDuration: duration, delay: delay, options: .curveEaseIn, animations: {
+            let delay = 3 * animationDuration * Double(index) / count
+            UIView.animate(withDuration: animationDuration, delay: delay, options: .curveEaseIn, animations: {
                 layer.transform = TransformForRotatingLayer(layer, angle: self.endAngle)
             }, completion: nil)
         }
 
-        let delay = DispatchTime.now() + Double(Int64(duration * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
-        DispatchQueue.main.asyncAfter(deadline: delay) {
-            self.completion?()
+        DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
+            self.completion()
         }
     }
 }
