@@ -1,4 +1,4 @@
-#Side Menu
+# Side Menu
 
 [![Platform](http://img.shields.io/badge/platform-iOS-blue.svg?style=flat)](http://cocoapods.org/?q=YALSideMenu)
 [![License](http://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://github.com/Yalantis/Side-Menu.iOS/blob/master/LICENSE)
@@ -10,15 +10,15 @@ Check this <a href="https://www.behance.net/gallery/20411445/Mobile-Animations-I
 
 <img src="https://d13yacurqjgara.cloudfront.net/users/125056/screenshots/1689922/events-menu_1-1-6.gif" />
 
-##Requirements
+## Requirements
 
-- iOS 7.x / 8.x / 9.x (see installation instructions)
+- iOS 7+
 - Swift 3
 - Xcode 8
 
-##Installation
+## Installation
 
-####Using [CocoaPods](http://cocoapods.org)
+#### Using [CocoaPods](http://cocoapods.org)
 
 Simply add the following line to your Podfile:
 
@@ -26,9 +26,9 @@ Simply add the following line to your Podfile:
 pod 'YALSideMenu', '~> 2.0'
 ```
 
-*(CocoaPods v0.36 or later required. See [this blog post](http://blog.cocoapods.org/Pod-Authors-Guide-to-CocoaPods-Frameworks/) for details.)*
+*(CocoaPods v1.1 or later is required)*
 
-####Manual Installation
+#### Manual Installation
 
 > For application targets that do not support embedded frameworks, such as iOS 7, SideMenu can be integrated by including source files from the SideMenu folder directly, optionally wrapping the top-level types into `struct SideMenu` to simulate a namespace. Yes, this sucks.
 
@@ -41,7 +41,7 @@ pod 'YALSideMenu', '~> 2.0'
 7. Expand the "Link Binary With Libraries" group, and add `SideMenu.framework`
 8. Click on the `+` button at the top left of the panel and select "New Copy Files Phase". Rename this new phase to "Copy Frameworks", set the "Destination" to "Frameworks", and add `SideMenu.framework`.
 
-##Usage
+## Usage
 
 1. Import `SideMenu` module
 
@@ -60,20 +60,21 @@ pod 'YALSideMenu', '~> 2.0'
 3. Set `preferredContentSize` in menu view controller to specify the desired menu width
 4. In content view controller store an animator, that will animate our menu.
 
-    ```swift
-    import SideMenu
-    class ContentViewController: UIViewController  {
-        var menuAnimator : MenuTransitionAnimator!
-    }
-    ```
+	```swift
+	import SideMenu
+	class ContentViewController: UIViewController  {
+	var menuAnimator : MenuTransitionAnimator!
+	}
+	```
 5. Initialize an animator for presentation with parameters
 
-    ```swift
-    menuAnimator = MenuTransitionAnimator(mode: .presentation, shouldPassEventsOutsideMenu: false) { [unowned self] in
+	```swift
+	menuAnimator = MenuTransitionAnimator(mode: .presentation, shouldPassEventsOutsideMenu: false) { [unowned self] in
 	    self.dismiss(animated: true, completion: nil)
-    }
-    ```
-    If you want, for example, to dismiss your menu when a tap outside menu takes place, you should pass 'false' to 'shouldPassEventsOutsideMenu' flag and assign a 'tappedOutsideHandler'.In fact, you are free to do whatever you want when a tap outside menu occurs or, if you want to have access to your content view controller, just pass 'true' and assign 'tappedOutsideHandler' to nil.
+	}
+	```
+	
+ If you want, for example, to dismiss your menu when a tap outside menu takes place, you should pass 'false' to 'shouldPassEventsOutsideMenu' flag and assign a 'tappedOutsideHandler'.In fact, you are free to do whatever you want when a tap outside menu occurs or, if you want to have access to your content view controller, just pass 'true' and assign 'tappedOutsideHandler' to nil.
 6. Implement class of UIViewControllerTransitioningDelegate that will return our menuAnimator from method animationControllerForPresentedController and assign it to transitioningDelegate of menu view controller(Don't forget to set .Custom modal presentation style). To dismiss menu you should return MenuTransitionAnimator(mode: .Dismissal) from animationControllerForDismissedController method.
 
     ```swift
