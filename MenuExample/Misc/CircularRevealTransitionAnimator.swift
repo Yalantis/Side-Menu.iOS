@@ -35,7 +35,7 @@ extension CircularRevealTransitionAnimator: UIViewControllerAnimatedTransitionin
         }()
 
         let animator = CircularRevealAnimator(layer: target.layer, center: center, startRadius: 0, endRadius: radius)
-        animator.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
+        animator.timingFunction = CAMediaTimingFunction(name: .easeIn)
         animator.duration = transitionDuration(using: context)
         animator.completion = {
             source.removeFromSuperview()
