@@ -13,8 +13,8 @@ Check this <a href="https://www.behance.net/gallery/20411445/Mobile-Animations-I
 ## Requirements
 
 - iOS 7+
-- Swift 3
-- Xcode 8
+- Swift 4.2
+- Xcode 9
 
 ## Installation
 
@@ -23,7 +23,7 @@ Check this <a href="https://www.behance.net/gallery/20411445/Mobile-Animations-I
 Simply add the following line to your Podfile:
 
 ```ruby
-pod 'YALSideMenu', '~> 2.0'
+pod 'YALSideMenu', '~> 2.1'
 ```
 
 *(CocoaPods v1.1 or later is required)*
@@ -104,7 +104,7 @@ P.S. We’re going to publish more awesomeness wrapped in code and a tutorial on
 
 	The MIT License (MIT)
 
-	Copyright © 2017 Yalantis
+	Copyright © 2018 Yalantis
 
 	Permission is hereby granted, free of charge, to any person obtaining a copy
 	of this software and associated documentation files (the "Software"), to deal
