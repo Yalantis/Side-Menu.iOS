@@ -1,16 +1,21 @@
 PODS:
-  - YALSideMenu (2.0.1)
+  - YALSideMenu (2.1)
 
 DEPENDENCIES:
-  - YALSideMenu
+  - YALSideMenu (from `https://github.com/Yalantis/Side-Menu.iOS.git`)
 
-SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
-    - YALSideMenu
+EXTERNAL SOURCES:
+  YALSideMenu:
+    :git: https://github.com/Yalantis/Side-Menu.iOS.git
+
+CHECKOUT OPTIONS:
+  YALSideMenu:
+    :commit: b2e6ed843df8b5ea16e6095b349d8662082861a3
+    :git: https://github.com/Yalantis/Side-Menu.iOS.git
 
 SPEC CHECKSUMS:
-  YALSideMenu: 4d6b90ea44dcdded18a99e46b676e4ad51d9c6bb
+  YALSideMenu: 694540ec3fcee7355af087a15feac1f765fe7b3f
 
-PODFILE CHECKSUM: 53487e71883f28290f5d4ec555a1064afc205b24
+PODFILE CHECKSUM: c97be4a6a0d7cef23eb1d6c2e8033609d194768c
 
 COCOAPODS: 1.6.0.beta.2
