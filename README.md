@@ -94,6 +94,13 @@ pod 'YALSideMenu', '~> 2.1'
     }
     ```
 
+### Example
+
+```
+$ pod install
+$ open MenuExample.xcworkspace
+```
+
 ## Let us know!
 
 We’d be really happy if you sent us links to your projects where you use our component. Just send an email to github@yalantis.com And do let us know if you have any questions or suggestion regarding the animation. 
