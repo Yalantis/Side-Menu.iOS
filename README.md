@@ -23,7 +23,7 @@ Check this <a href="https://www.behance.net/gallery/20411445/Mobile-Animations-I
 Simply add the following line to your Podfile:
 
 ```ruby
-pod 'YALSideMenu', '~> 2.1'
+pod 'YALSideMenu', git: 'https://github.com/Yalantis/Side-Menu.iOS.git'
 ```
 
 *(CocoaPods v1.1 or later is required)*
