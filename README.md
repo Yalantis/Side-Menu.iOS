@@ -73,19 +73,15 @@ pod 'YALSideMenu', '~> 2.1'
 	    self.dismiss(animated: true, completion: nil)
 	}
 	```
-	
- If you want, for example, to dismiss your menu when a tap outside menu takes place, you should pass 'false' to 'shouldPassEventsOutsideMenu' flag and assign a 'tappedOutsideHandler'.In fact, you are free to do whatever you want when a tap outside menu occurs or, if you want to have access to your content view controller, just pass 'true' and assign 'tappedOutsideHandler' to nil.
-6. Implement class of UIViewControllerTransitioningDelegate that will return our menuAnimator from method animationControllerForPresentedController and assign it to transitioningDelegate of menu view controller(Don't forget to set .Custom modal presentation style). To dismiss menu you should return MenuTransitionAnimator(mode: .Dismissal) from animationControllerForDismissedController method.
+6. Dismisson on a tap outside menu (Optional):
+If you want to dismiss your menu when a tap outside menu takes place, you should pass `false` to `shouldPassEventsOutsideMenu` flag and assign a `tappedOutsideHandler`.In fact, you are free to do whatever you want when a tap outside menu occurs or, if you want to have access to your content view controller, just pass 'true' and assign `tappedOutsideHandler` to nil.
+7. Implement class of `UIViewControllerTransitioningDelegate` that will return our `menuAnimator` from method `animationControllerForPresentedController`. To dismiss menu you should return `MenuTransitionAnimator(mode: .Dismissal)` from `animationControllerForDismissedController` method.
 
     ```swift
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-	    let menu = segue.destination as! MenuViewController
-	    menu.transitioningDelegate = self
-	    menu.modalPresentationStyle = .custom
-    }
-
-    func animationController(forPresented presented: UIViewController, presenting _: UIViewController,
-        source _: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    func animationController(
+        forPresented presented: UIViewController,
+	          presenting _: UIViewController,
+                      source _: UIViewController) -> UIViewControllerAnimatedTransitioning? {
             return menuAnimator
     }
     
@@ -93,7 +89,18 @@ pod 'YALSideMenu', '~> 2.1'
         return MenuTransitionAnimator(mode: .dismissal)
     }
     ```
-
+8. Assign `transitioningDelegate` of menu view controller to self and set `modalPresentationStyle`to `.custom`.
+    ```swift
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+	    let menu = segue.destination as! MenuViewController
+	    menu.transitioningDelegate = self
+	    menu.modalPresentationStyle = .custom
+    }
+    ```
+9. Present your menu controller with a segue:
+    ```swift
+    performSegue(withIdentifier: "menu", sender: self)
+    ```
 ## Let us know!
 
 We’d be really happy if you sent us links to your projects where you use our component. Just send an email to github@yalantis.com And do let us know if you have any questions or suggestion regarding the animation. 
