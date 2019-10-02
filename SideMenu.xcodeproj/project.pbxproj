@@ -114,16 +114,17 @@
 				TargetAttributes = {
 					50B42EFF1A6A879C00B05352 = {
 						CreatedOnToolsVersion = 6.1.1;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 1110;
 					};
 				};
 			};
 			buildConfigurationList = 50B42EFA1A6A879C00B05352 /* Build configuration list for PBXProject "SideMenu" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 50B42EF61A6A879C00B05352;
 			productRefGroup = 50B42F011A6A879C00B05352 /* Products */;
@@ -286,7 +287,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.yalantis.ios.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -306,7 +307,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.yalantis.ios.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
