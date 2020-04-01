@@ -242,17 +242,17 @@
 				TargetAttributes = {
 					50B9664D1A25E40E00208F2E = {
 						CreatedOnToolsVersion = 6.1;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 1140;
 					};
 				};
 			};
 			buildConfigurationList = 50B966491A25E40E00208F2E /* Build configuration list for PBXProject "MenuExample" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
+				Base,
 			);
 			mainGroup = 50B966451A25E40E00208F2E;
 			productRefGroup = 50B9664F1A25E40E00208F2E /* Products */;
@@ -425,7 +425,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.yalantis.ios.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = MenuExample;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -438,7 +438,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.yalantis.ios.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = MenuExample;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
