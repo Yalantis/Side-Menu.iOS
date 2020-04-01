@@ -8,19 +8,23 @@ import UIKit
 
 open class MenuTransitionAnimator: NSObject {
     //MARK: Public properties
-    @objc public enum Mode : Int { case presentation, dismissal }
+    @objc public enum Mode: Int { case presentation, dismissal }
+    public enum Position { case left, right }
     
     //MARK: Private properties
-    fileprivate let duration = 0.5
-    fileprivate let angle: CGFloat = 2
-    fileprivate var mode: Mode
-    fileprivate var shouldPassEventsOutsideMenu : Bool
-    fileprivate var tappedOutsideHandler : (() -> Void)?
+    private let duration = 0.5
+    private let angle: CGFloat = 2
+    private var mode: Mode
+    private var position: Position
+    private var shouldPassEventsOutsideMenu : Bool
+    private var tappedOutsideHandler : (() -> Void)?
     
-    public init(mode: Mode, shouldPassEventsOutsideMenu: Bool = true, tappedOutsideHandler: (() -> Void)? = nil) {
+    public init(mode: Mode, position: Position = .left, shouldPassEventsOutsideMenu: Bool = true, tappedOutsideHandler: (() -> Void)? = nil) {
         self.mode = mode
         self.tappedOutsideHandler = tappedOutsideHandler
         self.shouldPassEventsOutsideMenu = shouldPassEventsOutsideMenu
+        self.position = position
+        
         super.init()
     }
 }
@@ -41,8 +45,16 @@ extension MenuTransitionAnimator {
         let menu = context.viewController(forKey: UITransitionContextViewControllerKey.to)!
         
         let view = menu.view!
-        view.frame = CGRect(x: 0, y: 0, width: menu.preferredContentSize.width, height: host.view.bounds.height)
-        view.autoresizingMask = [.flexibleRightMargin, .flexibleHeight]
+        switch position {
+        case .left:
+            view.frame = CGRect(x: 0, y: 0, width: menu.preferredContentSize.width, height: host.view.bounds.height)
+            view.autoresizingMask = [.flexibleRightMargin, .flexibleHeight]
+        case .right:
+            let x = host.view.bounds.width - menu.preferredContentSize.width
+            view.frame = CGRect(x: x, y: 0, width: menu.preferredContentSize.width, height: host.view.bounds.height)
+            view.autoresizingMask = [.flexibleRightMargin, .flexibleHeight]
+        }
+        
         view.translatesAutoresizingMaskIntoConstraints = true
         
         if shouldPassEventsOutsideMenu {
