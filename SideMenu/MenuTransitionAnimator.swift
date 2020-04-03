@@ -52,7 +52,7 @@ extension MenuTransitionAnimator {
         case .right:
             let x = host.view.bounds.width - menu.preferredContentSize.width
             view.frame = CGRect(x: x, y: 0, width: menu.preferredContentSize.width, height: host.view.bounds.height)
-            view.autoresizingMask = [.flexibleRightMargin, .flexibleHeight]
+            view.autoresizingMask = [.flexibleLeftMargin, .flexibleHeight]
         }
         
         view.translatesAutoresizingMaskIntoConstraints = true
