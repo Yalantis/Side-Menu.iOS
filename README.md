@@ -13,8 +13,8 @@ Check this <a href="https://www.behance.net/gallery/20411445/Mobile-Animations-I
 ## Requirements
 
 - iOS 7+
-- Swift 4.2
-- Xcode 9
+- Swift 5
+- Xcode 11
 
 ## Installation
 
@@ -23,7 +23,7 @@ Check this <a href="https://www.behance.net/gallery/20411445/Mobile-Animations-I
 Simply add the following line to your Podfile:
 
 ```ruby
-pod 'YALSideMenu', '~> 2.1'
+pod 'YALSideMenu', '~> 2.0.1'
 ```
 
 *(CocoaPods v1.1 or later is required)*
@@ -53,7 +53,7 @@ pod 'YALSideMenu', '~> 2.1'
 
 	```swift
 	class MyFancyMenuViewController: UIViewController, Menu  {
-		@IBOutlet var menuItems = [UIView] ()
+        @IBOutlet var menuItems = [UIView] ()
 	}
 	```
 
@@ -63,25 +63,28 @@ pod 'YALSideMenu', '~> 2.1'
 	```swift
 	import SideMenu
 	class ContentViewController: UIViewController  {
-	var menuAnimator : MenuTransitionAnimator!
+        var menuAnimator : MenuTransitionAnimator!
 	}
 	```
 5. Initialize an animator for presentation with parameters
 
 	```swift
 	menuAnimator = MenuTransitionAnimator(mode: .presentation, shouldPassEventsOutsideMenu: false) { [unowned self] in
-	    self.dismiss(animated: true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
 	}
 	```
 	
- If you want, for example, to dismiss your menu when a tap outside menu takes place, you should pass 'false' to 'shouldPassEventsOutsideMenu' flag and assign a 'tappedOutsideHandler'.In fact, you are free to do whatever you want when a tap outside menu occurs or, if you want to have access to your content view controller, just pass 'true' and assign 'tappedOutsideHandler' to nil.
+ If you want, for example, to dismiss your menu when a tap outside menu takes place, you should pass `false` to `shouldPassEventsOutsideMenu` flag and assign a `tappedOutsideHandler`.In fact, you are free to do whatever you want when a tap outside menu occurs or, if you want to have access to your content view controller, just pass `true` and assign `tappedOutsideHandler` to nil.
+ 
+ It's possible to specify menu position starting from version `2.0.2`. To position menu on the left side you should pass `.left` to `position` in `MenuTransitionAnimator` init. To position menu on the right side - pass `.right` accordingly.
+ 
 6. Implement class of UIViewControllerTransitioningDelegate that will return our menuAnimator from method animationControllerForPresentedController and assign it to transitioningDelegate of menu view controller(Don't forget to set .Custom modal presentation style). To dismiss menu you should return MenuTransitionAnimator(mode: .Dismissal) from animationControllerForDismissedController method.
 
     ```swift
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-	    let menu = segue.destination as! MenuViewController
-	    menu.transitioningDelegate = self
-	    menu.modalPresentationStyle = .custom
+        let menu = segue.destination as! MenuViewController
+        menu.transitioningDelegate = self
+        menu.modalPresentationStyle = .custom
     }
 
     func animationController(forPresented presented: UIViewController, presenting _: UIViewController,
